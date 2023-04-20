@@ -860,6 +860,8 @@ end
 mem.hookcall(0x0047FF37, 1, 1, changedCharacterCalcStatBonusByItems)
 mem.hookcall(0x0048875B, 1, 1, changedCharacterCalcStatBonusByItems)
 
+local ADAPTIVE = string.lower(SETTINGS["AdaptiveMonsterMode"])
+
 -- modified Monster Calculate Damage
 -- supersedes skill-mod.lua:2658-2693
 local function modifiedMonsterCalculateDamage(d, def, monsterPointer, attackType)
@@ -867,7 +869,11 @@ local function modifiedMonsterCalculateDamage(d, def, monsterPointer, attackType
 	-- get monster
 
 	local monsterIndex, monster = GetMonster(d.edi)
+if ((ADAPTIVE == "default") or (ADAPTIVE == "disabled")) then 
 	Mlevel = Game.MonstersTxt[monster.Id].Level
+else
+Mlevel = monsterArray["Level"]
+end
 	-- execute original code
 
 	local damage = def(monsterPointer, attackType)
