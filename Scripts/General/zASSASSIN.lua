@@ -95,7 +95,7 @@ function events.CalcSpellDamage(t)
 	end
 		comboPoint=0
     end
-
+end
 	
 end
 
